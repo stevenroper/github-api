@@ -7,7 +7,8 @@ app.controller('GitHubController', function($scope, githubService) {
 	$scope.getUserData = function() {
 		githubService.getUser($scope.searchText).then(function(res) {
 			$scope.user = res;
-			console.log(res);
+			// console.log(res);
+			$scope.searchText = '';
 		})
 	};
 
