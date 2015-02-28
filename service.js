@@ -7,10 +7,18 @@ app.service('githubService', function($http, $q) {
   var param = "?client_id=" + id + "&client_secret=" + sec;
 
 	this.getUser = function(username) {
+		var deferred = $q.defer();
 		var url = 'https://api.github.com/users/' + username + param;
+
 		$http({
 			method: 'GET',
 			url: url
+		}).then(function onSuccess(data) {
+			deferred.resolve(data.data);
+		}, function onFailure(reason) {
+			deferred.reject(reason);
 		});
+
+		return deferred.promise;
 	};
 });
